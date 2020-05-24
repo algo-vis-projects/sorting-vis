@@ -1,12 +1,15 @@
 import React, { useState, useEffect } from 'react';
 import { Bar } from 'react-chartjs-2';
 import numsToArray from '../utils/numsToArray';
+import generateRandomArray from '../utils/generateArray';
 import bubbleSort from '../utils/bubbleSort';
 import './Bubble.css';
+import InputSize from '../Components.js/InputSize';
 
 const Bubble = () => {
   const [sorted, setSorted] = useState([]);
   const [history, setHistory] = useState([]);
+  const [colors, setColors] = useState([]);
   const [userInput, setUserInput] = useState('');
   const [data, setData] = useState({});
 
@@ -23,14 +26,18 @@ const Bubble = () => {
     history.length > 0 &&
       setInterval(() => {
         const labels = [];
-        history[intervalCount].forEach((obj) =>
+        history[intervalCount].currSort.forEach((obj) =>
           labels.push(obj.label)
         );
 
         const values = [];
-        history[intervalCount].forEach((obj) =>
+        history[intervalCount].currSort.forEach((obj) =>
           values.push(obj.value)
         );
+
+        let newColors = new Array(Number(userInput)).fill('blue');
+        newColors[history[intervalCount].swap1] = 'red';
+        newColors[history[intervalCount].swap2] = 'red';
 
         intervalCount <= history.length - 2 && intervalCount++;
 
@@ -38,6 +45,7 @@ const Bubble = () => {
           labels: labels,
           datasets: [
             {
+              backgroundColor: newColors,
               label: 'Sorted',
               data: values,
             },
@@ -49,25 +57,17 @@ const Bubble = () => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-
-    const arrayOfNums = numsToArray(userInput);
+    const arrayOfNums = numsToArray(generateRandomArray(userInput));
     const sortHistory = bubbleSort(arrayOfNums);
     setHistory(sortHistory);
   };
   return (
     <div onSubmit={handleSubmit} className="bubbleContainer">
-      <form className="bubbleForm">
-        <h3 className="bubbleHeader">Bubble</h3>
-        <div className="bubbleInput">
-          <input
-            type="number"
-            required
-            value={userInput}
-            onChange={handleChange}
-          />
-          <button type="submit">Submit</button>
-        </div>
-      </form>
+      <InputSize
+        setUserInput={setUserInput}
+        userInput={userInput}
+        handleChange={handleChange}
+      />
 
       <div className="bubbleContent">
         <ul className="bubbleNumList">
@@ -89,7 +89,7 @@ const Bubble = () => {
             text: 'Bubble Sort',
             fontSize: 20,
             maintainAspectRatio: true,
-            color: ['red', 'blue', 'green'],
+            // color: ['red', 'blue', 'green'],
           },
           scales: {
             yAxes: [
@@ -99,6 +99,9 @@ const Bubble = () => {
                 },
               },
             ],
+          },
+          animation: {
+            duration: 0,
           },
         }}
       />
