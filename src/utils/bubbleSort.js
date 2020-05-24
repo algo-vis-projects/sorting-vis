@@ -1,11 +1,11 @@
 const bubbleSort = (arr) => {
-  let history = [];
+  let history = [[...arr]];
 
   for (let i = 0; i < arr.length - 1; ++i) {
     let swapped = false;
-    let copy = arr.map((obj) => ({ ...obj }));
-
-    for (let j = 0; j < copy.length - i - 1; ++j) {
+    for (let j = 0; j < arr.length - i - 1; ++j) {
+      const lastArr = history[history.length - 1];
+      let copy = lastArr.map((ele) => ({ ...ele }));
       if (copy[j].value > copy[j + 1].value) {
         [copy[j], copy[j + 1]] = [copy[j + 1], copy[j]];
         swapped = true;
@@ -19,13 +19,5 @@ const bubbleSort = (arr) => {
 
   return history;
 };
-
-console.log(
-  bubbleSort([
-    { label: 0, value: 5 },
-    { label: 1, value: 4 },
-    { label: 2, value: 3 },
-  ])
-);
 
 module.exports = bubbleSort;

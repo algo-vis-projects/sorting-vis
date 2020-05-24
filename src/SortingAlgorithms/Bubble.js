@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Bar } from 'react-chartjs-2';
 import numsToArray from '../utils/numsToArray';
 import bubbleSort from '../utils/bubbleSort';
@@ -8,6 +8,7 @@ const Bubble = () => {
   const [sorted, setSorted] = useState([]);
   const [history, setHistory] = useState([]);
   const [userInput, setUserInput] = useState('');
+  const [data, setData] = useState({});
 
   const handleChange = (event) => {
     let val = event.target.value;
@@ -17,30 +18,42 @@ const Bubble = () => {
     setSorted(numsToArray(userInput));
   };
 
+  useEffect(() => {
+    let intervalCount = 0;
+    history.length > 0 &&
+      setInterval(() => {
+        const labels = [];
+        history[intervalCount].forEach((obj) =>
+          labels.push(obj.label)
+        );
+
+        const values = [];
+        history[intervalCount].forEach((obj) =>
+          values.push(obj.value)
+        );
+
+        intervalCount <= history.length - 2 && intervalCount++;
+
+        const data = {
+          labels: labels,
+          datasets: [
+            {
+              label: 'Sorted',
+              data: values,
+            },
+          ],
+        };
+        setData(data);
+      }, 500);
+  }, [history]);
+
   const handleSubmit = (event) => {
     event.preventDefault();
 
     const arrayOfNums = numsToArray(userInput);
-    const sortedArr = bubbleSort(arrayOfNums);
-    setSorted(sortedArr);
+    const sortHistory = bubbleSort(arrayOfNums);
+    setHistory(sortHistory);
   };
-
-  const labels = [];
-  sorted.forEach((obj) => labels.push(obj.label));
-
-  const values = [];
-  sorted.forEach((obj) => values.push(obj.value));
-
-  const data = {
-    labels: labels,
-    datasets: [
-      {
-        label: 'Sorted',
-        data: values,
-      },
-    ],
-  };
-
   return (
     <div onSubmit={handleSubmit} className="bubbleContainer">
       <form className="bubbleForm">
@@ -77,6 +90,15 @@ const Bubble = () => {
             fontSize: 20,
             maintainAspectRatio: true,
             color: ['red', 'blue', 'green'],
+          },
+          scales: {
+            yAxes: [
+              {
+                ticks: {
+                  beginAtZero: true,
+                },
+              },
+            ],
           },
         }}
       />
