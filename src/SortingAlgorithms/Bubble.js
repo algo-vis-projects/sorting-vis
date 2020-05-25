@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Bar } from 'react-chartjs-2';
+import 'chartjs-plugin-datalabels';
 import numsToArray from '../utils/numsToArray';
 import generateRandomArray from '../utils/generateArray';
 import bubbleSort from '../utils/bubbleSort';
@@ -9,7 +10,6 @@ import InputSize from '../Components.js/InputSize';
 const Bubble = () => {
   const [sorted, setSorted] = useState([]);
   const [history, setHistory] = useState([]);
-  const [colors, setColors] = useState([]);
   const [userInput, setUserInput] = useState('');
   const [data, setData] = useState({});
 
@@ -83,17 +83,31 @@ const Bubble = () => {
         data={data}
         width={100}
         height={30}
+        plugins={['ChartDataLabels']}
         options={{
           title: {
             display: true,
             text: 'Bubble Sort',
             fontSize: 20,
             maintainAspectRatio: true,
-            // color: ['red', 'blue', 'green'],
           },
           scales: {
+            xAxes: [
+              {
+                scaleLabel: {
+                  display: true,
+                  labelString: 'Indecies',
+                  fontSize: 20,
+                },
+              },
+            ],
             yAxes: [
               {
+                scaleLabel: {
+                  display: true,
+                  labelString: 'Values',
+                  fontSize: 20,
+                },
                 ticks: {
                   beginAtZero: true,
                 },
@@ -102,6 +116,17 @@ const Bubble = () => {
           },
           animation: {
             duration: 0,
+          },
+          plugins: {
+            // Change options for ALL labels of THIS CHART
+            datalabels: {
+              color: '#36A2EB',
+              anchor: 'end',
+              align: 'top',
+              font: {
+                size: 20,
+              },
+            },
           },
         }}
       />

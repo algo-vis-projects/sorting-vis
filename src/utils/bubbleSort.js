@@ -9,9 +9,8 @@ const bubbleSort = (arr) => {
       if (copy[j].value > copy[j + 1].value) {
         [copy[j], copy[j + 1]] = [copy[j + 1], copy[j]];
         swapped = true;
-
-        history.push({ currSort: copy, swap1: j, swap2: j + 1 });
       }
+      history.push({ currSort: copy, swap1: j, swap2: j + 1 });
     }
 
     if (!swapped) break;
