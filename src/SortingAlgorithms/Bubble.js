@@ -4,8 +4,9 @@ import 'chartjs-plugin-datalabels';
 import numsToArray from '../utils/numsToArray';
 import generateRandomArray from '../utils/generateArray';
 import bubbleSort from '../utils/bubbleSort';
-import './Bubble.css';
 import InputSize from '../Components.js/InputSize';
+
+import './Bubble.css';
 
 const Bubble = () => {
   const [sorted, setSorted] = useState([]);
@@ -35,9 +36,9 @@ const Bubble = () => {
           values.push(obj.value)
         );
 
-        let newColors = new Array(Number(userInput)).fill('blue');
-        newColors[history[intervalCount].swap1] = 'red';
-        newColors[history[intervalCount].swap2] = 'red';
+        let newColors = new Array(Number(userInput)).fill('#7b90d2');
+        newColors[history[intervalCount].swap1] = '#e87a90';
+        newColors[history[intervalCount].swap2] = '#e87a90';
 
         intervalCount <= history.length - 2 && intervalCount++;
 
@@ -46,7 +47,7 @@ const Bubble = () => {
           datasets: [
             {
               backgroundColor: newColors,
-              label: 'Sorted',
+              label: 'Values',
               data: values,
             },
           ],
@@ -57,6 +58,12 @@ const Bubble = () => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
+    if (data.length > 0) {
+      setSorted([]);
+      setHistory([]);
+      data([]);
+    }
+
     const arrayOfNums = numsToArray(generateRandomArray(userInput));
     const sortHistory = bubbleSort(arrayOfNums);
     setHistory(sortHistory);
