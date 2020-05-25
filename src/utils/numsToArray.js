@@ -1,12 +1,12 @@
 const numsToArray = (nums) => {
   let arrayOfObjs = [];
 
-  nums.forEach((num, idx) =>
+  nums.forEach((num, idx) => {
     arrayOfObjs.push({
       label: idx,
       value: num,
-    })
-  );
+    });
+  });
 
   return arrayOfObjs;
 };
