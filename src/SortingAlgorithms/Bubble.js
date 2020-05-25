@@ -52,7 +52,7 @@ const Bubble = () => {
           ],
         };
         setData(data);
-      }, 500);
+      }, 50);
   }, [history]);
 
   const handleSubmit = (event) => {
@@ -96,7 +96,7 @@ const Bubble = () => {
               {
                 scaleLabel: {
                   display: true,
-                  labelString: 'Indecies',
+                  labelString: 'Original Indices',
                   fontSize: 20,
                 },
               },
@@ -130,6 +130,12 @@ const Bubble = () => {
           },
         }}
       />
+      <div>
+        Legend
+        <div>
+          Numbers being compared <div />
+        </div>
+      </div>
     </div>
   );
 };
