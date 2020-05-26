@@ -53,7 +53,7 @@ const Bubble = () => {
           ],
         };
         setData(data);
-      }, 50);
+      }, 500);
   }, [history]);
 
   const handleSubmit = (event) => {
@@ -86,62 +86,74 @@ const Bubble = () => {
         </ul>
       </div>
 
-      <Bar
-        data={data}
-        width={100}
-        height={30}
-        plugins={['ChartDataLabels']}
-        options={{
-          title: {
-            display: true,
-            text: 'Bubble Sort',
-            fontSize: 20,
-            maintainAspectRatio: true,
-          },
-          scales: {
-            xAxes: [
-              {
-                scaleLabel: {
-                  display: true,
-                  labelString: 'Original Indices',
-                  fontSize: 20,
+      <div className="legendContainer">
+        <div className="legend">
+          <div className="legendTitle">Legend</div>
+          <div className="legendText">
+            <div className="comparedColor">
+              Numbers being compared <div className="comparedNum" />
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div className="bar">
+        <Bar
+          className="bar"
+          data={data}
+          width={100}
+          height={30}
+          plugins={['ChartDataLabels']}
+          options={{
+            title: {
+              display: true,
+              text: 'Bubble Sort',
+              fontSize: 20,
+              maintainAspectRatio: true,
+            },
+            legend: {
+              display: false,
+              position: 'bottom',
+            },
+            scales: {
+              xAxes: [
+                {
+                  scaleLabel: {
+                    display: true,
+                    labelString: 'Original Indices',
+                    fontSize: 20,
+                  },
                 },
-              },
-            ],
-            yAxes: [
-              {
-                scaleLabel: {
-                  display: true,
-                  labelString: 'Values',
-                  fontSize: 20,
+              ],
+              yAxes: [
+                {
+                  scaleLabel: {
+                    display: true,
+                    labelString: 'Values',
+                    fontSize: 20,
+                  },
+                  ticks: {
+                    beginAtZero: true,
+                  },
                 },
-                ticks: {
-                  beginAtZero: true,
+              ],
+            },
+            animation: {
+              duration: 0,
+            },
+            plugins: {
+              // Change options for ALL labels of THIS CHART
+              datalabels: {
+                color: '#36A2EB',
+                anchor: 'end',
+                align: 'top',
+                font: {
+                  size: 20,
                 },
-              },
-            ],
-          },
-          animation: {
-            duration: 0,
-          },
-          plugins: {
-            // Change options for ALL labels of THIS CHART
-            datalabels: {
-              color: '#36A2EB',
-              anchor: 'end',
-              align: 'top',
-              font: {
-                size: 20,
               },
             },
-          },
-        }}
-      />
-      <div>
-        Legend
-        <div>
-          Numbers being compared <div />
-        </div>
+          }}
+        />
       </div>
     </div>
   );

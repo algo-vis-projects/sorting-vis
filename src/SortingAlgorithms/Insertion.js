@@ -37,8 +37,8 @@ const Insertion = () => {
           values.push(obj.value)
         );
 
-        let newColors = new Array(Number(userInput)).fill('blue');
-        newColors[history[intervalCount].comparison] = 'red';
+        let newColors = new Array(Number(userInput)).fill('#7b90d2');
+        newColors[history[intervalCount].comparison] = '#e87a90';
 
         intervalCount <= history.length - 2 && intervalCount++;
 
@@ -80,71 +80,87 @@ const Insertion = () => {
         </ul>
       </div>
 
-      <Bar
-        data={data}
-        width={100}
-        height={30}
-        plugins={['ChartDataLabels']}
-        options={{
-          title: {
-            display: true,
-            text: 'Insertion Sort',
-            fontSize: 20,
-            maintainAspectRatio: true,
-          },
-          legend: {
-            display: false,
-            position: 'bottom',
-          },
-          scales: {
-            xAxes: [
-              {
-                scaleLabel: {
-                  display: true,
-                  labelString: 'Original Indices',
-                  fontSize: 20,
+      <div className="bubbleContent">
+        <ul className="bubbleNumList">
+          {sorted.map((obj, idx) => (
+            <li key={idx} className="bubbleNum">
+              {obj.value}
+            </li>
+          ))}
+        </ul>
+      </div>
+
+      <div className="legendContainer">
+        <div className="legend">
+          <div className="legendTitle">Legend</div>
+          <div className="legendText">
+            <div>Key: {key || 'N/A'}</div>
+            <div>
+              <div className="comparedColor">
+                Numbers being compared
+                <div className="comparedNum" />
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div className="bar">
+        <Bar
+          data={data}
+          width={100}
+          height={30}
+          plugins={['ChartDataLabels']}
+          options={{
+            title: {
+              display: true,
+              text: 'Insertion Sort',
+              fontSize: 20,
+              maintainAspectRatio: true,
+            },
+            legend: {
+              display: false,
+              position: 'bottom',
+            },
+            scales: {
+              xAxes: [
+                {
+                  scaleLabel: {
+                    display: true,
+                    labelString: 'Original Indices',
+                    fontSize: 20,
+                  },
                 },
-              },
-            ],
-            yAxes: [
-              {
-                scaleLabel: {
-                  display: true,
-                  labelString: 'Values',
-                  fontSize: 20,
+              ],
+              yAxes: [
+                {
+                  scaleLabel: {
+                    display: true,
+                    labelString: 'Values',
+                    fontSize: 20,
+                  },
+                  ticks: {
+                    beginAtZero: true,
+                  },
                 },
-                ticks: {
-                  beginAtZero: true,
+              ],
+            },
+            animation: {
+              duration: 0,
+            },
+            plugins: {
+              // Change options for ALL labels of THIS CHART
+              datalabels: {
+                color: '#36A2EB',
+                anchor: 'end',
+                align: 'top',
+                font: {
+                  size: 20,
                 },
-              },
-            ],
-          },
-          animation: {
-            duration: 0,
-          },
-          plugins: {
-            // Change options for ALL labels of THIS CHART
-            datalabels: {
-              color: '#36A2EB',
-              anchor: 'end',
-              align: 'top',
-              font: {
-                size: 20,
               },
             },
-          },
-        }}
-      />
-      <div>
-        Legend
-        <div>
-          Key: {key}
-          <div />
-        </div>
-        <div>
-          Number being compared with key
-          <div />
-        </div>
+          }}
+        />
       </div>
     </div>
   );
