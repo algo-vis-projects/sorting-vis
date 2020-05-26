@@ -53,7 +53,7 @@ const Bubble = () => {
           ],
         };
         setData(data);
-      }, 500);
+      }, 16000 / Math.pow(userInput, 1.6));
   }, [history]);
 
   const handleSubmit = (event) => {
@@ -148,7 +148,10 @@ const Bubble = () => {
                 anchor: 'end',
                 align: 'top',
                 font: {
-                  size: 20,
+                  size:
+                    userInput > 64
+                      ? 0
+                      : Math.pow(40 / Math.log2(userInput), 1.1),
                 },
               },
             },
