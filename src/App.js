@@ -7,13 +7,14 @@ function App() {
   return (
     <div className="App">
       <div className="nav">
-        <Link to="/merge">Merge</Link>
-        <Link to="/insertion">Insertion</Link>
         <Link to="/bubble">Bubble</Link>
+        <Link to="/insertion">Insertion</Link>
+        <Link to="/merge">Merge</Link>
       </div>
-      <Route path="/merge" component={Merge} />
-      <Route path="/insertion" component={Insertion} />
-      <Route path="/bubble" component={Bubble} />
+      <Route exact path="/merge" component={Merge} />
+      <Route exact path="/insertion" component={Insertion} />
+      <Route exact path="/bubble" component={Bubble} />
+      <Route exact path="/" component={Bubble} />
     </div>
   );
 }

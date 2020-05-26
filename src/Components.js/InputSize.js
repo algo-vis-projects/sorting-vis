@@ -1,4 +1,5 @@
 import React from 'react';
+import './InputSize.css';
 
 const InputSize = ({ setUserInput, userInput }) => {
   const handleChange = (event) => {
@@ -8,7 +9,7 @@ const InputSize = ({ setUserInput, userInput }) => {
 
   return (
     <form className="bubbleForm">
-      <h3 className="bubbleHeader">Bubble</h3>
+      <h3 className="bubbleHeader">Enter an array size below:</h3>
       <div className="bubbleInput">
         <input
           type="number"

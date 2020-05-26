@@ -1,10 +1,56 @@
+.bubbleContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
 .bubbleNumList {
     display: flex;
     justify-content: center;
-
     padding: 0;
 }
 
 .bubbleNum {
     list-style-type: none;
+}
+
+.legendContainer {
+    width: 80%;
+    display: flex;
+    justify-content: flex-end;
+}
+
+.legend {
+    display: flex;
+    flex-direction: column;
+    border: 1px solid;
+    width: 20rem;
+    /* margin: 1rem; */
+    padding: .5rem;
+}
+
+.legendTitle {
+    text-decoration: underline;
+    margin-bottom: 1rem;
+}
+
+.legendText {
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+}
+
+.comparedNum {
+    height: 15px;
+    width: 15px;
+    background-color: #e87a90;
+    margin-left: 1rem;
+}
+
+.comparedColor {
+    display: flex;
+}
+
+.bar {
+    width: 80%;
 }
